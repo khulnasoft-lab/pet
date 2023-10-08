@@ -3,16 +3,6 @@
 [![GitHub release](https://img.shields.io/github/release/khulnasoft-lab/pet.svg)](https://github.com/khulnasoft-lab/pet/releases/latest)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/khulnasoft-lab/pet/blob/master/LICENSE)
 
-<img src="doc/logo.png" width="150">
-
-Simple command-line snippet manager, written in Go
-
-<img src="doc/pet01.gif" width="700">
-
-You can use variables (`<param>` or `<param=default_value>` ) in snippets.
-
-<img src="doc/pet08.gif" width="700">
-
 
 # Abstract
 
