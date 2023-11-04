@@ -12,7 +12,7 @@ require (
 	github.com/jroimartin/gocui v0.5.0
 	github.com/mattn/go-runewidth v0.0.15
 	github.com/pkg/errors v0.9.1
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 	github.com/xanzy/go-gitlab v0.93.0
 	golang.org/x/crypto v0.14.0
 	golang.org/x/oauth2 v0.13.0
