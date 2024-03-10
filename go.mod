@@ -16,7 +16,7 @@ require (
 	github.com/xanzy/go-gitlab v0.95.1
 	golang.org/x/crypto v0.17.0
 	golang.org/x/oauth2 v0.15.0
-	gopkg.in/alessio/shellescape.v1 v1.0.0-20170105083845-52074bc9df61
+	gopkg.in/alessio/shellescape.v1 v1.4.2
 )
 
 require (
