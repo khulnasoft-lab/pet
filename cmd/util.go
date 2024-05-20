@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"os/exec"
-	"runtime"
+	"strconv"
 	"strings"
 
 	"github.com/fatih/color"
@@ -15,31 +14,17 @@ import (
 	"github.com/khulnasoft-lab/pet/snippet"
 )
 
-func editFile(command, file string) error {
-	command += " " + file
+func editFile(command, file string, startingLine int) error {
+	// Note that this works for most unix editors (nano, vi, vim, etc)
+	// TODO: Remove for other kinds of editors - this is only for UX
+	command += " +" + strconv.Itoa(startingLine) + " " + file
 	return run(command, os.Stdin, os.Stdout)
-}
-
-func run(command string, r io.Reader, w io.Writer) error {
-	var cmd *exec.Cmd
-	if len(config.Conf.General.Cmd) > 0 {
-		line := append(config.Conf.General.Cmd, command)
-		cmd = exec.Command(line[0], line[1:]...)
-	} else if runtime.GOOS == "windows" {
-		cmd = exec.Command("cmd", "/c", command)
-	} else {
-		cmd = exec.Command("sh", "-c", command)
-	}
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = w
-	cmd.Stdin = r
-	return cmd.Run()
 }
 
 func filter(options []string, tag string) (commands []string, err error) {
 	var snippets snippet.Snippets
 	if err := snippets.Load(); err != nil {
-		return commands, fmt.Errorf("Load snippet failed: %v", err)
+		return commands, fmt.Errorf("load snippet failed: %v", err)
 	}
 
 	if 0 < len(tag) {
@@ -72,7 +57,7 @@ func filter(options []string, tag string) (commands []string, err error) {
 		snippetTexts[t] = s
 		if config.Flag.Color {
 			t = fmt.Sprintf("[%s]: %s%s",
-				color.RedString(s.Description), command, color.BlueString(tags))
+				color.HiRedString(s.Description), command, color.HiCyanString(tags))
 		}
 		text += t + "\n"
 	}
@@ -86,8 +71,16 @@ func filter(options []string, tag string) (commands []string, err error) {
 	}
 
 	lines := strings.Split(strings.TrimSuffix(buf.String(), "\n"), "\n")
+	var params [][2]string
 
-	params := dialog.SearchForParams(lines)
+	// If only one line is selected, search for params in the command
+	if len(lines) == 1 {
+		snippetInfo := snippetTexts[lines[0]]
+		params = dialog.SearchForParams(snippetInfo.Command)
+	} else {
+		params = nil
+	}
+
 	if params != nil {
 		snippetInfo := snippetTexts[lines[0]]
 		dialog.CurrentCommand = snippetInfo.Command
@@ -100,4 +93,24 @@ func filter(options []string, tag string) (commands []string, err error) {
 		commands = append(commands, fmt.Sprint(snippetInfo.Command))
 	}
 	return commands, nil
+}
+
+// CountLines returns the number of lines in a certain buffer
+func CountLines(r io.Reader) (int, error) {
+	buf := make([]byte, 32*1024)
+	count := 0
+	lineSep := []byte{'\n'}
+
+	for {
+		c, err := r.Read(buf)
+		count += bytes.Count(buf[:c], lineSep)
+
+		switch {
+		case err == io.EOF:
+			return count, nil
+
+		case err != nil:
+			return count, err
+		}
+	}
 }
