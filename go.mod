@@ -14,14 +14,11 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15
-	github.com/pkg/errors v0.8.0
-	github.com/spf13/cobra v0.0.7
-	github.com/spf13/pflag v1.0.3 // indirect
-	github.com/xanzy/go-gitlab v0.105.0
-	//github.com/xanzy/go-gitlab v0.105.0
-	golang.org/x/crypto v0.23.0
-	golang.org/x/oauth2 v0.20.0
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	github.com/pkg/errors v0.9.1
+	github.com/spf13/cobra v1.8.0
+	github.com/xanzy/go-gitlab v0.95.1
+	golang.org/x/crypto v0.21.0
+	golang.org/x/oauth2 v0.15.0
 	gopkg.in/alessio/shellescape.v1 v1.0.0-20170105083845-52074bc9df61
 )
 
@@ -47,5 +44,5 @@ require (
 	golang.org/x/text v0.15.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/protobuf v1.29.1 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 )
