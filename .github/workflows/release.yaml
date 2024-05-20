@@ -6,7 +6,7 @@ on:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Install dependencies
         run: |
@@ -24,6 +24,6 @@ jobs:
         uses: goreleaser/goreleaser-action@v5
         with:
           version: v1.18.2
-          args: release --rm-dist
+          args: release --clean
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ORG_REPO_TOKEN }}
