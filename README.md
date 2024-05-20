@@ -492,4 +492,4 @@ https://blog.saltedbrain.org/2018/12/converting-keep-to-pet-snippets.html
 MIT
 
 # Author
-Teppei Fukuda
+KhulnaSoft Lab

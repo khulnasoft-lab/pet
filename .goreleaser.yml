@@ -47,7 +47,7 @@ archives:
 nfpms:
   -
     homepage: https://github.com/khulnasoft-lab/pet
-    maintainer: Teppei Fukuda <khulnasoft-lab@gmail.com>
+    maintainer: KhulnaSoft Lab <khulnasoft-lab@gmail.com>
     description: "Simple command-line snippet manager"
     bindir: /usr/local/bin
     license: MIT
