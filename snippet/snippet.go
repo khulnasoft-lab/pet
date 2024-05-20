@@ -6,19 +6,19 @@ import (
 	"os"
 	"sort"
 
-	"github.com/BurntSushi/toml"
 	"github.com/khulnasoft-lab/pet/config"
+	"github.com/pelletier/go-toml"
 )
 
 type Snippets struct {
-	Snippets []SnippetInfo `toml:"snippets"`
+	Snippets []SnippetInfo
 }
 
 type SnippetInfo struct {
-	Description string   `toml:"description"`
-	Command     string   `toml:"command"`
-	Tag         []string `toml:"tag"`
-	Output      string   `toml:"output"`
+	Description string
+	Command     string `toml:"command,multiline"`
+	Tag         []string
+	Output      string
 }
 
 // Load reads toml file.
@@ -27,9 +27,16 @@ func (snippets *Snippets) Load() error {
 	if _, err := os.Stat(snippetFile); os.IsNotExist(err) {
 		return nil
 	}
-	if _, err := toml.DecodeFile(snippetFile, snippets); err != nil {
-		return fmt.Errorf("Failed to load snippet file. %v", err)
+	f, err := os.ReadFile(snippetFile)
+	if err != nil {
+		return fmt.Errorf("failed to load snippet file. %v", err)
 	}
+
+	err = toml.Unmarshal(f, snippets)
+	if err != nil {
+		return fmt.Errorf("failed to parse snippet file. %v", err)
+	}
+
 	snippets.Order()
 	return nil
 }
@@ -38,10 +45,10 @@ func (snippets *Snippets) Load() error {
 func (snippets *Snippets) Save() error {
 	snippetFile := config.Conf.General.SnippetFile
 	f, err := os.Create(snippetFile)
-	defer f.Close()
 	if err != nil {
-		return fmt.Errorf("Failed to save snippet file. err: %s", err)
+		return fmt.Errorf("failed to save snippet file. err: %s", err)
 	}
+	defer f.Close()
 	return toml.NewEncoder(f).Encode(snippets)
 }
 
@@ -50,7 +57,7 @@ func (snippets *Snippets) ToString() (string, error) {
 	var buffer bytes.Buffer
 	err := toml.NewEncoder(&buffer).Encode(snippets)
 	if err != nil {
-		return "", fmt.Errorf("Failed to convert struct to TOML string: %v", err)
+		return "", fmt.Errorf("failed to convert struct to TOML string: %v", err)
 	}
 	return buffer.String(), nil
 }
