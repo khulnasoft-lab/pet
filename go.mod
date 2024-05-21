@@ -5,9 +5,9 @@ go 1.20
 require (
 	github.com/atotto/clipboard v0.1.4
 	github.com/briandowns/spinner v0.0.0-20170614154858-48dbb65d7bd5
-	github.com/chzyer/logex v1.1.10 // indirect
-	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e
-	github.com/chzyer/test v0.0.0-20210722231415-061457976a23 // indirect
+	github.com/chzyer/logex v1.2.1 // indirect
+	github.com/chzyer/readline v1.5.1
+	github.com/chzyer/test v1.0.0 // indirect
 	github.com/fatih/color v1.17.0
 	github.com/google/go-github v15.0.0+incompatible
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
