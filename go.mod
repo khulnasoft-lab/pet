@@ -10,13 +10,13 @@ require (
 	github.com/chzyer/test v0.0.0-20210722231415-061457976a23 // indirect
 	github.com/fatih/color v1.17.0
 	github.com/google/go-github v15.0.0+incompatible
-	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15
 	github.com/pkg/errors v0.8.0
-	github.com/spf13/cobra v0.0.7
-	github.com/spf13/pflag v1.0.3 // indirect
+	github.com/spf13/cobra v1.8.1
+	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/xanzy/go-gitlab v0.105.0
 	//github.com/xanzy/go-gitlab v0.105.0
 	golang.org/x/crypto v0.23.0
